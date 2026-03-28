@@ -1,7 +1,31 @@
 const form = document.getElementById("registrationForm");
+const usernameField = document.getElementById("username");
+const usernameFeedback = document.getElementById("usernameError");
+
+// Add eventListener on username field
+usernameField.addEventListener("input", handleUsernameField);
 
 // Add eventlistener on Submit
 form.addEventListener("submit", handleSubmit);
+
+// Function to handle username input field
+function handleUsernameField(event) {
+    const charCount = event.target.value; // grab character count in real time
+    const desiredLength = 8;
+
+    if (charCount.length === 0) {
+        usernameFeedback.textContent = ""; // nothing to feeback
+    } else if (charCount.length < desiredLength) {
+        const remainCharLength = desiredLength - charCount.length;
+        console.log(desiredLength);
+        console.log(charCount);
+        console.log(charCount.length);
+        usernameFeedback.textContent = "Too short " + remainCharLength + " more character(s) recommended";
+    }
+    else{
+        usernameFeedback.textContent = "";
+    }
+}
 
 // Function to handle form submission
 function handleSubmit(event) {
@@ -35,7 +59,6 @@ function handleSubmit(event) {
 
 // Function to further validate username
 function validateUsername(userName) {
-    console.log(userName.length);
     if (userName.length < 8) {
         alert("Please choose a username atleast 8 characters in length");
     }
@@ -45,11 +68,10 @@ function validateUsername(userName) {
 
 // Function to further validate email
 function validateEmail(userEmail) {
-    console.log(userEmail);
-    const emailString = userEmail;
+    // const emailString = userEmail;
     const dotCom = ".com";
 
-    if (!emailString.toLowerCase().includes(dotCom.toLowerCase())) {
+    if (!userEmail.toLowerCase().includes(dotCom.toLowerCase())) {
         alert("Please verify your email address again.  It must end in '.com'");
     } else {
         return true;
@@ -58,11 +80,11 @@ function validateEmail(userEmail) {
 
 // Function to further validate username
 function validatePassword(userPassword1, userPassword2) {
-    console.log(userPassword1);
+
     if (userPassword1 !== userPassword2) {
         alert("Confirm password must match excatly.");
     }
-    else{
+    else {
         return true;
     }
 }
