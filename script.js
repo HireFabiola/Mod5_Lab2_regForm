@@ -1,14 +1,26 @@
 const form = document.getElementById("registrationForm");
 const usernameField = document.getElementById("username");
+const passwordField = document.getElementById("password");
 const usernameFeedback = document.getElementById("usernameError");
+const passwordFeedback = document.getElementById('passwordError');
+
 
 // Add eventListener on username field
 usernameField.addEventListener("input", handleUsernameField);
 
+// Add eventListener on password field
+passwordField.addEventListener("input", handlePasswordField);
+
 // Add eventlistener on Submit
 form.addEventListener("submit", handleSubmit);
 
-// Function to handle username input field
+
+//Function to handle password field in real time
+function handlePasswordField(event){
+
+}
+
+// Function to handle username input field in realtime
 function handleUsernameField(event) {
     const charCount = event.target.value; // grab character count in real time
     const desiredLength = 8;
@@ -22,7 +34,7 @@ function handleUsernameField(event) {
         console.log(charCount.length);
         usernameFeedback.textContent = "Too short " + remainCharLength + " more character(s) recommended";
     }
-    else{
+    else {
         usernameFeedback.textContent = "";
     }
 }
@@ -39,13 +51,10 @@ function handleSubmit(event) {
 
     // Load form input elements
     const password1 = document.getElementById("password");
-    console.log(password1.value);
     const password2 = document.getElementById("confirmPassword");
-    console.log(password2.value);
     const email = document.getElementById("email");
-    console.log(email.value);
     const username = document.getElementById("username");
-    console.log(username.value);
+   
 
     // Call to further validate all inputs
     if
