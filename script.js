@@ -58,6 +58,11 @@ function validateEmail(userEmail) {
 
 // Function to further validate username
 function validatePassword(userPassword1, userPassword2) {
-    console.log('Made it to validate password');
-
+    console.log(userPassword1);
+    if (userPassword1 !== userPassword2) {
+        alert("Confirm password must match excatly.");
+    }
+    else{
+        return true;
+    }
 }
