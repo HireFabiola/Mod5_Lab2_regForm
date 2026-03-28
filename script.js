@@ -25,28 +25,37 @@ function handleSubmit(event) {
 
     // Call to further validate all inputs
     if
-        (validateUsername(username.value) && (validatePassword(password1.value, password2.value)) &&
-        validateEmail(email.value)) {
+        (validateUsername(username.value) && validateEmail(email.value) && (validatePassword(password1.value, password2.value))) {
         alert("You have succesfully passed all input field checks! Well done!");
     }
     else {
-        alert("Sorry, one or more of your inputs did not pass the secondary checks :(");
+        alert("Sorry, one or more of your inputs did not pass the secondary checks :(\n Please try again.");
     }
 }
 
 // Function to further validate username
 function validateUsername(userName) {
-    console.log("I AM HERE");
     console.log(userName.length);
     if (userName.length < 8) {
         alert("Please choose a username atleast 8 characters in length");
-        return false;
     }
+    else
+        return true;
 }
 
 // Function to further validate email
 function validateEmail(userEmail) {
-    console.log('Made it to validate email');
+    console.log(userEmail);
+    const emailString = userEmail;
+    const dotCom = ".com";
+
+
+
+    if (!emailString.includes(dotCom)) {
+        alert("Please verify your email address again.  It must end in '.com'");
+    } else {
+        return true;
+    }
 }
 
 // Function to further validate username
