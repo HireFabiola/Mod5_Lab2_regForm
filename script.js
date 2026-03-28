@@ -49,9 +49,7 @@ function validateEmail(userEmail) {
     const emailString = userEmail;
     const dotCom = ".com";
 
-
-
-    if (!emailString.includes(dotCom)) {
+    if (!emailString.toLowerCase().includes(dotCom.toLowerCase())) {
         alert("Please verify your email address again.  It must end in '.com'");
     } else {
         return true;
@@ -61,4 +59,5 @@ function validateEmail(userEmail) {
 // Function to further validate username
 function validatePassword(userPassword1, userPassword2) {
     console.log('Made it to validate password');
+
 }
