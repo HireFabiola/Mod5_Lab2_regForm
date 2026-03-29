@@ -4,15 +4,14 @@ const passwordField = document.getElementById("password");
 const usernameFeedback = document.getElementById("usernameError");
 const passwordFeedback = document.getElementById('passwordError');
 
+// Add eventlistener on Submit
+form.addEventListener("submit", handleSubmit);
 
 // Add eventListener on username field
 usernameField.addEventListener("input", handleUsernameField);
 
 // Add eventListener on password field
 passwordField.addEventListener("input", handlePasswordField);
-
-// Add eventlistener on Submit
-form.addEventListener("submit", handleSubmit);
 
 
 //Function to handle password field in real time
@@ -22,17 +21,18 @@ function handlePasswordField(event){
 
 // Function to handle username input field in realtime
 function handleUsernameField(event) {
-    const charCount = event.target.value; // grab character count in real time
+    const charCount = event.target.value; // grab input in real time
     const desiredLength = 8;
 
-    if (charCount.length === 0) {
-        usernameFeedback.textContent = ""; // nothing to feeback
+    if (charCount.trim() === "") {
+        console.log(charCount);
+        usernameFeedback.textContent = "Username cannot be empty"; // nothing to feeback
     } else if (charCount.length < desiredLength) {
         const remainCharLength = desiredLength - charCount.length;
         console.log(desiredLength);
         console.log(charCount);
         console.log(charCount.length);
-        usernameFeedback.textContent = "Too short " + remainCharLength + " more character(s) recommended";
+        usernameFeedback.textContent = "Too short- " + remainCharLength + " more character(s) recommended";
     }
     else {
         usernameFeedback.textContent = "";
