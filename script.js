@@ -68,8 +68,8 @@ function handleUsernameField(event) {
     const charCount = event.target.value; // grab input in real time
     const desiredLength = 8;
 
-    if (charCount.trim() === "") {
-        usernameFeedback.textContent = "Username cannot be empty"; // nothing to feeback
+    if ((charCount.trim() === "") || (charCount.startsWith(' '))) {
+        usernameFeedback.textContent = "Username cannot be empty nor begin with a space"; // nothing to feeback
     } else if (charCount.length < desiredLength) {
         const remainCharLength = desiredLength - charCount.length;
         console.log(desiredLength);
@@ -111,9 +111,11 @@ function handleSubmit(event) {
 
 // Function to further validate username
 function validateUsername(userName) {
-    if (userName.length < 8) {
+    if (userName.length < 8){
         alert("Please choose a username atleast 8 characters in length");
     }
+    else if (userName.startsWith(' ') || (userName ===""))
+        alert ("Username cannot begin with a space or be empty");
     else
         return true;
 }
