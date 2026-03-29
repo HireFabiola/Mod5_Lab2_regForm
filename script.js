@@ -1,6 +1,7 @@
 const form = document.getElementById("registrationForm");
 const usernameField = document.getElementById("username");
 const passwordField = document.getElementById("password");
+const confirmPasswordField = document.getElementById("confirmPassword");
 const usernameFeedback = document.getElementById("usernameError");
 const passwordFeedback = document.getElementById('passwordError');
 
@@ -13,6 +14,14 @@ usernameField.addEventListener("input", handleUsernameField);
 // Add eventListener on password field
 passwordField.addEventListener("input", handlePasswordField);
 
+// Add eventListener on confirm password field
+confirmPasswordField.addEventListener("input", handlecConfirmPasswordField);
+
+
+//Function to handle confirm password field in real time
+function handlecConfirmPasswordField(event){
+
+}
 
 //Function to handle password field in real time
 function handlePasswordField(event) {
@@ -28,26 +37,18 @@ function handlePasswordField(event) {
         
 
         if (password.length < minLength) {
-            console.log('im here1');
             conditions.push("Password must be at least " + minLength + " characters long.");
         }
         if (!hasUpperCase) {
-            console.log('im here2');
             conditions.push("Password must contain at least one uppercase letter.");
         }
         if (!hasLowerCase) {
-            console.log('im here3');
             conditions.push("Password must contain at least one lowercase letter.");
         }
         if (!hasNumber) {
-            console.log('im here4');
             conditions.push("Password must contain at least one number.");
         }
-       
-      console.log('im here5');
-      console.log(conditions);
-      passwordFeedback.textContent = conditions
-        
+      passwordFeedback.textContent = conditions;        
 }
 
 // Function to handle username input field in realtime
