@@ -1,3 +1,4 @@
+// Store form input nodes into variables for JS manipulation
 const form = document.getElementById("registrationForm");
 const usernameField = document.getElementById("username");
 const passwordField = document.getElementById("password");
@@ -5,6 +6,9 @@ const confirmPasswordField = document.getElementById("confirmPassword");
 const usernameFeedback = document.getElementById("usernameError");
 const passwordFeedback = document.getElementById('passwordError');
 const confirmPasswordFeedback = document.getElementById("confirmPasswordError");
+
+// Add eventlistener for page reload 
+window.addEventListener("DOMContentLoaded", handleLoadUserData);
 
 // Add eventlistener on Submit
 form.addEventListener("submit", handleSubmit);
@@ -21,8 +25,8 @@ confirmPasswordField.addEventListener("input", handlecConfirmPasswordField);
 
 //Function to handle confirm password field in real time
 function handlecConfirmPasswordField(event) {
-    const pwd = password.value;
-    const confirmPwd = confirmPassword.value;
+    const pwd = document.passwordField.value;
+    const confirmPwd = confirmPasswordField.value;
 
     // Compare the values and update the message
     if (confirmPwd.length === 0) {
@@ -102,27 +106,42 @@ function handleSubmit(event) {
     // Call to further validate all inputs
     if
         (validateUsername(username.value) && validateEmail(email.value) && (validatePassword(password1.value, password2.value))) {
+        // Call to store validated username and email
+        storeAllFields();
+
         alert("You have succesfully passed all input field checks! Well done!");
+
     }
     else {
         alert("Sorry, one or more of your inputs did not pass the secondary checks :(\n Please try again.");
     }
 }
 
+// Function to store validated inputs into localStorage
+function storeAllFields() {
+    const userData = {
+        username: usernameField.value,
+        email: document.getElementById("email").value,
+    };
+
+    localStorage.setItem("user", JSON.stringify(userData));
+}
+
 // Function to further validate username
 function validateUsername(userName) {
-    if (userName.length < 8){
+    if (userName.length < 8) {
         alert("Please choose a username atleast 8 characters in length");
     }
-    else if (userName.startsWith(' ') || (userName ===""))
-        alert ("Username cannot begin with a space or be empty");
+    else if (userName.startsWith(' ') || (userName === ""))
+        alert("Username cannot begin with a space or be empty");
+    else if (userName.trim().length < 8)
+        alert("Username cannot end with a space");
     else
         return true;
 }
 
 // Function to further validate email
 function validateEmail(userEmail) {
-    // const emailString = userEmail;
     const dotCom = ".com";
 
     if (!userEmail.toLowerCase().includes(dotCom.toLowerCase())) {
@@ -136,9 +155,20 @@ function validateEmail(userEmail) {
 function validatePassword(userPassword1, userPassword2) {
 
     if (userPassword1 !== userPassword2) {
-        alert("Confirm password must match excatly.");
+        alert("Both password fields must match excatly");
     }
     else {
         return true;
+    }
+}
+
+
+// Function to handle page reload and populate data in localStorage
+function handleLoadUserData() {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+        document.getElementById("username").value = storedUser.username;
+        document.getElementById("email").value = storedUser.email;
     }
 }
