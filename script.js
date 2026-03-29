@@ -4,6 +4,7 @@ const passwordField = document.getElementById("password");
 const confirmPasswordField = document.getElementById("confirmPassword");
 const usernameFeedback = document.getElementById("usernameError");
 const passwordFeedback = document.getElementById('passwordError');
+const confirmPasswordFeedback = document.getElementById("confirmPasswordError");
 
 // Add eventlistener on Submit
 form.addEventListener("submit", handleSubmit);
@@ -19,36 +20,47 @@ confirmPasswordField.addEventListener("input", handlecConfirmPasswordField);
 
 
 //Function to handle confirm password field in real time
-function handlecConfirmPasswordField(event){
+function handlecConfirmPasswordField(event) {
+    const pwd = password.value;
+    const confirmPwd = confirmPassword.value;
 
+    // Compare the values and update the message
+    if (confirmPwd.length === 0) {
+        // Clear the message if the confirm field is empty
+        confirmPasswordFeedback.textContent = '';
+    } else if (pwd === confirmPwd) {
+        confirmPasswordFeedback.textContent = 'Passwords match!';
+        confirmPasswordFeedback.style.color = 'green';
+    } else {
+        confirmPasswordFeedback.textContent = 'Passwords do not match!';
+        confirmPasswordFeedback.style.color = 'red';
+    }
 }
 
 //Function to handle password field in real time
 function handlePasswordField(event) {
-    console.log('Did I even get here?');
     const password = passwordField.value;
-    console.log(password);
 
-        const conditions = [];
-        const minLength = 8;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
-        const hasNumber = /[0-9]/.test(password);
-        
+    const conditions = [];
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
 
-        if (password.length < minLength) {
-            conditions.push("Password must be at least " + minLength + " characters long.");
-        }
-        if (!hasUpperCase) {
-            conditions.push("Password must contain at least one uppercase letter.");
-        }
-        if (!hasLowerCase) {
-            conditions.push("Password must contain at least one lowercase letter.");
-        }
-        if (!hasNumber) {
-            conditions.push("Password must contain at least one number.");
-        }
-      passwordFeedback.textContent = conditions;        
+    if (password.length < minLength) {
+        conditions.push("Password must be at least " + minLength + " characters long.");
+    }
+    if (!hasUpperCase) {
+        conditions.push("Password must contain at least one uppercase letter.");
+    }
+    if (!hasLowerCase) {
+        conditions.push("Password must contain at least one lowercase letter.");
+    }
+    if (!hasNumber) {
+        conditions.push("Password must contain at least one number.");
+    }
+
+    passwordFeedback.textContent = conditions;
 }
 
 // Function to handle username input field in realtime
