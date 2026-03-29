@@ -15,8 +15,39 @@ passwordField.addEventListener("input", handlePasswordField);
 
 
 //Function to handle password field in real time
-function handlePasswordField(event){
+function handlePasswordField(event) {
+    console.log('Did I even get here?');
+    const password = passwordField.value;
+    console.log(password);
 
+        const conditions = [];
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        
+
+        if (password.length < minLength) {
+            console.log('im here1');
+            conditions.push("Password must be at least " + minLength + " characters long.");
+        }
+        if (!hasUpperCase) {
+            console.log('im here2');
+            conditions.push("Password must contain at least one uppercase letter.");
+        }
+        if (!hasLowerCase) {
+            console.log('im here3');
+            conditions.push("Password must contain at least one lowercase letter.");
+        }
+        if (!hasNumber) {
+            console.log('im here4');
+            conditions.push("Password must contain at least one number.");
+        }
+       
+      console.log('im here5');
+      console.log(conditions);
+      passwordFeedback.textContent = conditions
+        
 }
 
 // Function to handle username input field in realtime
@@ -25,7 +56,6 @@ function handleUsernameField(event) {
     const desiredLength = 8;
 
     if (charCount.trim() === "") {
-        console.log(charCount);
         usernameFeedback.textContent = "Username cannot be empty"; // nothing to feeback
     } else if (charCount.length < desiredLength) {
         const remainCharLength = desiredLength - charCount.length;
@@ -54,7 +84,7 @@ function handleSubmit(event) {
     const password2 = document.getElementById("confirmPassword");
     const email = document.getElementById("email");
     const username = document.getElementById("username");
-   
+
 
     // Call to further validate all inputs
     if
